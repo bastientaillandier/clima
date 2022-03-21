@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 const kTempTextStyle = TextStyle(
   fontFamily: 'Spartan MB',
   fontSize: 100.0,
+  fontWeight: FontWeight.bold,
 );
 
 const kMessageTextStyle = TextStyle(
   fontFamily: 'Spartan MB',
-  fontSize: 60.0,
+  fontSize: 35.0,
+);
+
+const kCityTextStyle = TextStyle(
+  fontFamily: 'Spartan MB',
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
 );
 
 const kButtonTextStyle = TextStyle(

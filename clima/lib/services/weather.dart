@@ -1,4 +1,21 @@
+import 'package:clima/services/location.dart';
+import 'package:clima/services/networking.dart';
+
+const String apiKey = '4c8d17bdba370c895b6cdda606fbdef2';
+const String openWeatherMapURL =
+    'https://api.openweathermap.org/data/2.5/weather';
+
 class WeatherModel {
+  Future<dynamic> getLocationWeather() async {
+    Location location = Location();
+    await location.getCurrentPosition();
+    NetworkHelper network = NetworkHelper(
+        url:
+            '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric');
+    var weatherData = await network.getData();
+    return weatherData;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
@@ -21,13 +38,13 @@ class WeatherModel {
 
   String getMessage(int temp) {
     if (temp > 25) {
-      return 'It\'s 🍦 time';
+      return 'C\'est un temps à manger une 🍦';
     } else if (temp > 20) {
-      return 'Time for shorts and 👕';
-    } else if (temp < 10) {
-      return 'You\'ll need 🧣 and 🧤';
+      return 'Il est l\'heure d\'enfiler votre meilleur short et 👕';
+    } else if (temp < 3) {
+      return 'Tu auras besoins d\'une 🧣 et de 🧤';
     } else {
-      return 'Bring a 🧥 just in case';
+      return 'Prend un 🧥 au cas où';
     }
   }
 }
